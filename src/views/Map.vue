@@ -3,7 +3,9 @@
            
       
     <el-container >
-        <el-aside width="200px">Aside</el-aside>
+        <el-aside width="200px">{{$store.state.msg}}
+          <Routes/>
+        </el-aside>
         <el-main width="450px">
             <MapViewer/>
         </el-main>
@@ -13,27 +15,16 @@
 
 <script>
 import MapViewer from "@/components/MapViewer.vue";
+import Routes from "@/components/Routes.vue";
 
 export default {
   components: {
-    MapViewer
+    MapViewer,
+    Routes
   }
 };
 </script>
 
 
 <style lang="scss">
-// .el-container * {
-//   background: #eee;
-//   margin: 5px;
-// }
-
-.el-main {
-  height: 500px;
-}
-
-// .map-container {
-//   height: 100%;
-//   margin: 0;
-// }
 </style>

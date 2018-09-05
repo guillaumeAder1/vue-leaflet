@@ -5,7 +5,7 @@
       style="height:450px;"
      :zoom="zoom" 
      :center="center">
-      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+      <l-tile-layer :url="url" ></l-tile-layer>
       <l-marker :lat-lng="marker"></l-marker>
     </l-map>
   </div>
@@ -27,6 +27,9 @@ export default {
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       marker: L.latLng(47.41322, -1.219482)
     };
+  },
+  mounted() {
+    console.log(this.$refs);
   }
 };
 </script>
