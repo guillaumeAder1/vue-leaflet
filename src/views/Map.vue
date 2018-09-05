@@ -3,7 +3,8 @@
            
       
     <el-container >
-        <el-aside width="200px">{{$store.state.msg}}
+        <el-aside width="200px">
+          <!-- {{$store.state.msg}} -->
           <Routes/>
         </el-aside>
         <el-main width="450px">
