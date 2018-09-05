@@ -6,7 +6,7 @@
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo">
-          <el-menu-item index="item.route" v-for="item in routeList" :key="item.route">
+          <el-menu-item index="index" @click="select(index)" v-for="(item, index) in routeList" :key="index">
             <span>{{item.route}}</span> 
           </el-menu-item >        
         </el-menu>
@@ -21,6 +21,11 @@ export default {
     return {
       routeList: null
     };
+  },
+  methods: {
+    select: function(index) {
+      console.log(this.routeList[index]);
+    }
   },
   mounted() {
     this.$store.dispatch("getRouteList").then(res => {
