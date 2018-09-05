@@ -3,11 +3,11 @@
            
       
     <el-container >
-        <el-aside width="200px">
+        <el-aside>
           <!-- {{$store.state.msg}} -->
           <Routes/>
         </el-aside>
-        <el-main width="450px">
+        <el-main>
             <MapViewer/>
         </el-main>
     </el-container>
@@ -27,5 +27,11 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
+.el-main {
+  padding: 0;
+}
+.el-aside {
+  height: 450px;
+}
 </style>
