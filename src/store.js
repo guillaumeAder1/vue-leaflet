@@ -31,15 +31,19 @@ export default new Vuex.Store({
       Vue.http.get(allBusRoutes).then(result => {
         commit('GET_ROUTES_LIST', result.body.results)
       }, error => {
+        store.commit('GET_ERROR', error.message)
         console.error(error);
       });
     },
     getRouteStops(store, params) {
       const url = `${allRouteStops}routeid=${params.routeid}&operator=${params.operator}`
+      const { numberofresults, results } = res.body;
+      const str = `${numberofresults} results for route '${params.routeid}'`
       Vue.http.get(url).then(res => {
-        (res.body.numberofresults) ? store.commit('GET_STOP_LIST', res.body.results) : store.commit('GET_ERROR', `${numberofresults} results for route '${params.routeid}' `)
-      }, err => {
-        console.error(err)
+        (numberofresults) ? store.commit('GET_STOP_LIST', results) : store.commit('GET_ERROR', str);
+      }, error => {
+        store.commit('GET_ERROR', error.message)
+        console.error(error)
       })
     }
   },
