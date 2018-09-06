@@ -33,9 +33,6 @@ export default {
         }
     },
     created() {
-        // this.$store.dispatch("getRouteList").then(res => {
-        //   this.routeList = res;
-        // });
         this.$store.dispatch("getRouteList");
     }
 };

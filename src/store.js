@@ -23,7 +23,10 @@ export default new Vuex.Store({
       state.errorMessage = message
     },
     GET_STOP_LIST(state, list) {
-      state.stopList = list
+      const stops = list.reduce((acc, res) => {
+        return acc.concat(res.stops)
+      }, [])
+      state.stopList = stops
     }
   },
   actions: {
@@ -35,14 +38,18 @@ export default new Vuex.Store({
         console.error(error);
       });
     },
-    getRouteStops(store, params) {
-      const url = `${allRouteStops}routeid=${params.routeid}&operator=${params.operator}`
-      const { numberofresults, results } = res.body;
-      const str = `${numberofresults} results for route '${params.routeid}'`
+    getRouteStops(context, payload) {
+      const url = `${allRouteStops}routeid=${payload.routeid}&operator=${payload.operator}`;
       Vue.http.get(url).then(res => {
-        (numberofresults) ? store.commit('GET_STOP_LIST', results) : store.commit('GET_ERROR', str);
+        const { numberofresults, results } = res.body;
+        const str = `${numberofresults} results for route '${payload.routeid}'`
+        if (numberofresults) {
+          context.commit('GET_STOP_LIST', results)
+        } else {
+          context.commit('GET_ERROR', str);
+        }
       }, error => {
-        store.commit('GET_ERROR', error.message)
+        context.commit('GET_ERROR', error.message)
         console.error(error)
       })
     }

@@ -2,6 +2,9 @@
   <l-map style="height:450px;" :zoom="zoom" :center="center">
     <l-tile-layer :url="url"></l-tile-layer>
     <l-marker :lat-lng="marker"></l-marker>
+    <template v-for="(item, index) in stopList">
+        <l-marker :key="index" :lat-lng="createLatLong(item.latitude, item.longitude)"></l-marker>
+    </template>
   </l-map>
 </template>
 
@@ -14,12 +17,22 @@ export default {
         LTileLayer,
         LMarker
     },
+    methods: {
+        createLatLong: function(lat, long) {
+            return L.latLng(lat, long);
+        }
+    },
+    computed: {
+        stopList() {
+            return this.$store.getters.stopList;
+        }
+    },
     data() {
         return {
             zoom: 13,
-            center: L.latLng(47.41322, -1.219482),
+            center: L.latLng(53.34, -6.26),
             url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-            marker: L.latLng(47.41322, -1.219482)
+            marker: L.latLng(53.34, -6.26)
         };
     },
     mounted() {
