@@ -1,37 +1,43 @@
-<template>
-  
+<template>  
     <el-row class="tac">
       <el-col >
         <h5>Bus Routes</h5>
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo">
-          <el-menu-item index="index" @click="select(index)" v-for="(item, index) in routeList" :key="index">
-            <span>{{item.route}}</span> 
-          </el-menu-item >        
+          <template  v-for="(item, index) in routeList">
+            <el-menu-item index="index" @click="select(index)" :key="index">
+              <span>{{item.route}}</span> 
+            </el-menu-item >        
+          </template>
         </el-menu>
       </el-col>
-    </el-row>
-  
+    </el-row>  
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      routeList: null
-    };
+  // data() {
+  //   return {
+  //     routeList: null
+  //   };
+  // },
+  computed: {
+    routeList() {
+      console.log(this.$store);
+      return this.$store.getters.routeList;
+    }
   },
   methods: {
     select: function(index) {
-      console.log(this.routeList[index]);
+      console.log(index, this.$store.getters.routeList[index].route);
     }
   },
-  mounted() {
-    this.$store.dispatch("getRouteList").then(res => {
-      this.routeList = res;
-    });
-    // .cacth(err => console.log(err));
+  created() {
+    // this.$store.dispatch("getRouteList").then(res => {
+    //   this.routeList = res;
+    // });
+    this.$store.dispatch("getRouteList");
   }
 };
 </script>

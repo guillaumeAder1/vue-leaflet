@@ -6,21 +6,32 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    msg: "hellllloooo"
+    msg: "hellllloooo",
+    routeList: null
+  },
+  getters: {
+    routeList: state => state.routeList
   },
   mutations: {
-
+    GET_ROUTES_LIST(state, routeList) {
+      state.routeList = routeList
+    }
   },
   actions: {
-    getRouteList() {
-      return Vue.http.get(allBusRoutes).then(result => {
-        return result.body.results
+    getRouteList({ commit }) {
+      Vue.http.get(allBusRoutes).then(result => {
+        commit('GET_ROUTES_LIST', result.body.results)
       }, error => {
         console.error(error);
       });
     }
+    // getRouteList() {
+    //   return Vue.http.get(allBusRoutes).then(result => {
+    //     return result.body.results
+    //   }, error => {
+    //     console.error(error);
+    //   });
+    // }
   },
-  getters: {
 
-  }
 })
