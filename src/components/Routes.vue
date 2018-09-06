@@ -6,11 +6,9 @@
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo">
-          <template  index="index" @click="select(index)" v-for="(item, index) in routeList" >
-            <el-menu-item :key="index">
-              <span>{{item.route}}</span> 
-            </el-menu-item >        
-          </template>
+          <el-menu-item index="index" @click="select(index)" v-for="(item, index) in routeList" :key="index">
+            <span>{{item.route}}</span> 
+          </el-menu-item >        
         </el-menu>
       </el-col>
     </el-row>
@@ -30,12 +28,10 @@ export default {
     }
   },
   mounted() {
-    this.$store
-      .dispatch("getRouteList")
-      .then(res => {
-        this.routeList = res;
-      })
-      .cacth(err => console.log(err));
+    this.$store.dispatch("getRouteList").then(res => {
+      this.routeList = res;
+    });
+    // .cacth(err => console.log(err));
   }
 };
 </script>
