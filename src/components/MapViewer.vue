@@ -1,4 +1,5 @@
 <template>
+  <div>   
     <l-map
       style="height:450px;"
      :zoom="zoom" 
@@ -6,12 +7,13 @@
       <l-tile-layer :url="url" ></l-tile-layer>
       <l-marker :lat-lng="marker"></l-marker>
     </l-map>
+  </div>
 </template>
 
 <script>
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 export default {
-  props: ["height"],
+  name: "example",
   components: {
     LMap,
     LTileLayer,
