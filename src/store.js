@@ -1,20 +1,29 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { allBusRoutes } from './utils/constant'
+import { allBusRoutes, allRouteStops } from './utils/constant'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    msg: "hellllloooo",
-    routeList: null
+    routeList: null,
+    stopList: null,
+    errorMessage: null,
   },
   getters: {
-    routeList: state => state.routeList
+    routeList: state => state.routeList,
+    stopList: state => state.stopList,
+    errorMessage: state => state.errorMessage
   },
   mutations: {
     GET_ROUTES_LIST(state, routeList) {
       state.routeList = routeList
+    },
+    GET_ERROR(state, message) {
+      state.errorMessage = message
+    },
+    GET_STOP_LIST(state, list) {
+      state.stopList = list
     }
   },
   actions: {
@@ -24,14 +33,15 @@ export default new Vuex.Store({
       }, error => {
         console.error(error);
       });
+    },
+    getRouteStops(store, params) {
+      const url = `${allRouteStops}routeid=${params.routeid}&operator=${params.operator}`
+      Vue.http.get(url).then(res => {
+        (res.body.numberofresults) ? store.commit('GET_STOP_LIST', res.body.results) : store.commit('GET_ERROR', `${numberofresults} results for route '${params.routeid}' `)
+      }, err => {
+        console.error(err)
+      })
     }
-    // getRouteList() {
-    //   return Vue.http.get(allBusRoutes).then(result => {
-    //     return result.body.results
-    //   }, error => {
-    //     console.error(error);
-    //   });
-    // }
   },
 
 })

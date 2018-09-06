@@ -30,7 +30,8 @@ export default {
   },
   methods: {
     select: function(index) {
-      console.log(index, this.$store.getters.routeList[index].route);
+      let { route, operator } = this.$store.getters.routeList[index];
+      this.$store.dispatch("getRouteStops", { operator, routeid: route });
     }
   },
   created() {
