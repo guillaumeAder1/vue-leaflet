@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { allBusRoutes, allRouteStops } from './utils/constant'
+import { Notification } from 'element-ui';
 
 Vue.use(Vuex)
 

@@ -1,5 +1,5 @@
 <template>
-    <el-button plain @click="open">
+    <el-button plain>
         Closes automatically
     </el-button>
 </template>
@@ -10,7 +10,6 @@ export default {
     methods: {},
     created() {
         const h = this.$createElement;
-
         this.$notify({
             title: "Title",
             message: h("i", { style: "color: teal" }, "This is a reminder"),

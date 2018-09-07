@@ -13,6 +13,7 @@
 
 <script>
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { Notification } from "element-ui";
 // import Notification from "./Notification";
 export default {
     props: ["height"],

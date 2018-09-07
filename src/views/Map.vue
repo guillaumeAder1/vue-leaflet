@@ -14,6 +14,7 @@
 </template>
 
 <script>
+// leaflet basemaps : https://leaflet-extras.github.io/leaflet-providers/preview/
 import MapViewer from "@/components/MapViewer.vue";
 import Routes from "@/components/Routes.vue";
 import "leaflet/dist/leaflet.css";
