@@ -34,7 +34,7 @@ export default new Vuex.Store({
       Vue.http.get(allBusRoutes).then(result => {
         commit('GET_ROUTES_LIST', result.body.results)
       }, error => {
-        store.commit('GET_ERROR', error.message)
+        commit('GET_ERROR', error.message)
         console.error(error);
       });
     },

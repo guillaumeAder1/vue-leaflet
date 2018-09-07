@@ -1,16 +1,24 @@
 <template>
-  <el-button
-    plain
-    @click="open">
-    Closes automatically
-  </el-button>
+    <el-button plain @click="open">
+        Closes automatically
+    </el-button>
 </template>
 
 <script>
 export default {
     computed: {},
     methods: {},
-    created() {}
+    created() {
+        const h = this.$createElement;
+
+        this.$notify({
+            title: "Title",
+            message: h("i", { style: "color: teal" }, "This is a reminder"),
+            onClose: e => {
+                console.log(e);
+            }
+        });
+    }
 };
 </script>
 
