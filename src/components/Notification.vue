@@ -10,17 +10,18 @@ export default {
     data() {
         return {
             notif: null
-            //message: null
         };
     },
     computed: {
+        // plug to store computed value
+        // and create data/props 'message'
         ...mapGetters({
             message: "errorMessage"
         })
     },
     watch: {
+        // eveytime message changes, display notif
         message() {
-            console.log("changed", this.message);
             this.createNotif(this.message);
         }
     },
@@ -33,14 +34,6 @@ export default {
                 onClose: e => {}
             });
         }
-    },
-    created() {
-        // const h = this.$createElement;
-        // this.$notify({
-        //     title: "Alert",
-        //     message: h("i", { style: "color: teal" }, this.message),
-        //     onClose: e => {}
-        // });
     }
 };
 </script>
