@@ -1,10 +1,4 @@
-<template>
-    <el-button plain>
-        Closes automatically {{message}}
-    </el-button>
-</template>
 
-<script>
 import { mapGetters } from "vuex";
 export default {
     data() {
@@ -31,10 +25,14 @@ export default {
             this.$notify({
                 title: "Alert",
                 message: h("i", { style: "color: teal" }, msg),
-                onClose: e => {}
+                onClose: e => { }
             });
         }
+    },
+    render() {
+        // defined render function or warning in console...
+
     }
 };
-</script>
+
 

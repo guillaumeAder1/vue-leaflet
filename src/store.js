@@ -9,13 +9,21 @@ export default new Vuex.Store({
     routeList: null,
     stopList: null,
     errorMessage: null,
+    selectedRoute: null,
+    fullRouteResponse: null,
   },
   getters: {
     routeList: state => state.routeList,
     stopList: state => state.stopList,
-    errorMessage: state => state.errorMessage
+    errorMessage: state => state.errorMessage,
+    selectedRoute: state => state.selectedRoute,
+    fullRouteResponse: state => state.fullRouteResponse
+
   },
   mutations: {
+    SELECTED_ROUTE(state, routeid) {
+      state.selectedRoute = routeid;
+    },
     GET_ROUTES_LIST(state, routeList) {
       state.routeList = routeList
     },
@@ -27,6 +35,7 @@ export default new Vuex.Store({
         return acc.concat(res.stops)
       }, [])
       state.stopList = stops
+      state.fullRouteResponse = list
     }
   },
   actions: {
@@ -44,12 +53,16 @@ export default new Vuex.Store({
         const { numberofresults, results } = res.body;
         const str = `${numberofresults} result for route '${payload.routeid}'`
         if (numberofresults) {
+          context.commit('SELECTED_ROUTE', payload.routeid);
           context.commit('GET_STOP_LIST', results)
         } else {
           context.commit('GET_ERROR', str);
+          context.commit('SELECTED_ROUTE', false);
+
         }
       }, error => {
         context.commit('GET_ERROR', error.message)
+        context.commit('SELECTED_ROUTE', false);
         console.error(error)
       })
     }
