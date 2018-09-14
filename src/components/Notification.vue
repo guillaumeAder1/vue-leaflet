@@ -20,7 +20,7 @@ export default {
         })
     },
     watch: {
-        // eveytime message changes, display notif
+        // everytime message changes, display notif
         message() {
             this.createNotif(this.message);
         }
