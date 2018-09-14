@@ -24,20 +24,25 @@ export default {
         };
     },
     computed: {
-        routeList: function() {
+        routeList() {
             return this.$store.getters.routeList;
         },
-        filteredRoutes: function() {
+        filteredRoutes() {
+            if (!this.search) {
+                return this.routeList;
+            }
             let t =
                 this.routeList &&
                 this.routeList.filter(res => {
-                    res.route.toLowerCase().match(this.search.toLowerCase());
-                });
+                    return res.route
+                        .toLowerCase()
+                        .match(this.search.toLowerCase());
+                }, this);
             return t;
         }
     },
     methods: {
-        select: function(item) {
+        select(item) {
             // console.log(this._routes);
             //let { route, operator } = this.$store.getters.routeList[index];
             let { route, operator } = item;
