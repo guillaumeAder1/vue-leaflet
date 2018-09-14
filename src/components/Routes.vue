@@ -19,61 +19,19 @@
                     <span v-if="currentRoute">Directions for {{currentRoute}}</span>
                     <span v-else>No route available</span>
                 </el-menu-item>
-                <div class="bus-list" v-if="fullRoute">
-                    <el-menu-item-group v-for="(item, index) in fullRoute" :key="index">
-                        <el-menu-item :index="index.toString()">
-                            <b>{{item.origin}}</b> to
-                            <b>{{item.destination}}</b>
-                        </el-menu-item>
-                    </el-menu-item-group>
-                </div>
-                <!-- <el-menu class="el-menu-vertical-demo">
-                    <template v-for="(el,i) in fullRoute">
-                        <el-menu-item index="i" :key="i">
-                            <span>
-                                <b>{{el.origin}}</b> to
-                                <b>{{el.destination}}</b>
-                            </span>
-                        </el-menu-item>
-                    </template>
-                </el-menu> -->
-                <!-- <el-menu-item index="3" disabled>
-                    <i class="el-icon-document"></i>
-                    <span>Navigator Three</span>
-                </el-menu-item>
-                <el-menu-item index="4">
-                    <i class="el-icon-setting"></i>
-                    <span>Navigator Four</span>
-                </el-menu-item> -->
+                <el-scrollbar wrap-class="list" wrap-style="color: red;" view-style="font-weight: bold;" view-class="view-box" :native="false">
+                    <div class="bus-list" v-if="fullRoute">
+                        <el-menu-item-group v-for="(item, index) in fullRoute" :key="index">
+                            <el-menu-item :index="index.toString()">
+                                <b>{{item.origin}}</b> to
+                                <b>{{item.destination}}</b>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </div>
+                </el-scrollbar>
             </el-menu>
         </el-col>
     </el-row>
-    <!-- <el-row class="tac">
-        <el-col>
-            <h5>Bus Routes</h5>
-            <el-input placeholder="Search a bus route" v-model="search"></el-input>
-            <el-menu class="el-menu-vertical-demo">
-                <template v-for="(item, index) in filteredRoutes">
-                    <el-menu-item index="index" @click="select(item)" :key="index">
-                        <span>{{item.route}}</span>
-                    </el-menu-item>
-                </template>
-            </el-menu>
-            <template v-if="currentRoute">
-                <h5>Directions for route: {{currentRoute}}</h5>
-                <el-menu class="el-menu-vertical-demo">
-                    <template v-for="(el,i) in fullRoute">
-                        <el-menu-item index="i" :key="i">
-                            <span>
-                                <b>{{el.origin}}</b> to
-                                <b>{{el.destination}}</b>
-                            </span>
-                        </el-menu-item>
-                    </template>
-                </el-menu>
-            </template>
-        </el-col>
-    </el-row> -->
 </template>
 
 <script>
@@ -121,6 +79,8 @@ export default {
         this.$store.dispatch("getRouteList");
     }
 };
+
+// https://jsfiddle.net/chenfangxu/jfn5gzcw/
 </script>
 
 
