@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { allBusRoutes, allRouteStops } from './utils/constant'
-import { Notification } from 'element-ui';
 
 Vue.use(Vuex)
 
@@ -43,7 +42,7 @@ export default new Vuex.Store({
       const url = `${allRouteStops}routeid=${payload.routeid}&operator=${payload.operator}`;
       Vue.http.get(url).then(res => {
         const { numberofresults, results } = res.body;
-        const str = `${numberofresults} results for route '${payload.routeid}'`
+        const str = `${numberofresults} result for route '${payload.routeid}'`
         if (numberofresults) {
           context.commit('GET_STOP_LIST', results)
         } else {

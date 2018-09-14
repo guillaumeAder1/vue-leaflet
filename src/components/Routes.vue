@@ -43,8 +43,6 @@ export default {
     },
     methods: {
         select(item) {
-            // console.log(this._routes);
-            //let { route, operator } = this.$store.getters.routeList[index];
             let { route, operator } = item;
             this.$store.dispatch("getRouteStops", { operator, routeid: route });
         }
