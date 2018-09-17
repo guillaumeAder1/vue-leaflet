@@ -11,13 +11,15 @@ export default new Vuex.Store({
     errorMessage: null,
     selectedRoute: null,
     fullRouteResponse: null,
+    stopByDirection: null
   },
   getters: {
     routeList: state => state.routeList,
     stopList: state => state.stopList,
     errorMessage: state => state.errorMessage,
     selectedRoute: state => state.selectedRoute,
-    fullRouteResponse: state => state.fullRouteResponse
+    fullRouteResponse: state => state.fullRouteResponse,
+    stopByDirection: state => state.stopByDirection
 
   },
   mutations: {
@@ -36,6 +38,10 @@ export default new Vuex.Store({
       }, [])
       state.stopList = stops
       state.fullRouteResponse = list
+    },
+    GET_STOP_BY_DIRECTION(state, index) {
+      state.stopByDirection = state.fullRouteResponse[index].stops;
+      console.log(state.stopByDirection)
     }
   },
   actions: {
@@ -46,6 +52,9 @@ export default new Vuex.Store({
         commit('GET_ERROR', error.message)
         console.error(error);
       });
+    },
+    getDirectionStops(context, payload) {
+      context.commit('GET_STOP_BY_DIRECTION', payload.index)
     },
     getRouteStops(context, payload) {
       const url = `${allRouteStops}routeid=${payload.routeid}&operator=${payload.operator}`;

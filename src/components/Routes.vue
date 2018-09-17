@@ -22,7 +22,7 @@
                 <el-scrollbar wrap-class="list" wrap-style="color: red;" view-style="font-weight: bold;" view-class="view-box" :native="false">
                     <div class="bus-list" v-if="fullRoute">
                         <el-menu-item-group v-for="(item, index) in fullRoute" :key="index">
-                            <el-menu-item :index="index.toString()">
+                            <el-menu-item :index="index.toString()" @click="selectDirection(index)">
                                 <b>{{item.origin}}</b> to
                                 <b>{{item.destination}}</b>
                             </el-menu-item>
@@ -73,6 +73,10 @@ export default {
         select(item) {
             let { route, operator } = item;
             this.$store.dispatch("getRouteStops", { operator, routeid: route });
+        },
+        selectDirection(index) {
+            console.log(index);
+            this.$store.dispatch("getDirectionStops", { index });
         }
     },
     created() {
